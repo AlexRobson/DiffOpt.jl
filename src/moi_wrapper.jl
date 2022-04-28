@@ -480,7 +480,7 @@ attributes [`BackwardOutObjective`](@ref) and [`BackwardOutConstraint`](@ref).
 """
 function backward(model::Optimizer)
     st = MOI.get(model.optimizer, MOI.TerminationStatus())
-    if !in(st,  (MOI.LOCALLY_SOLVED, MOI.OPTIMAL))
+    if !in(st,  (MOI.LOCALLY_SOLVED, MOI.OPTIMAL, MOI.ALMOST_OPTIMAL))
         error("Trying to compute the forward differentiation on a model with termination status $(st)")
     end
     diff = _diff(model)
